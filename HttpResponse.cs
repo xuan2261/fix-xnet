@@ -1,8 +1,8 @@
 ﻿// Decompiled with JetBrains decompiler
 // Type: xNet.HttpResponse
 // Assembly: xNet, Version=3.3.3.0, Culture=neutral, PublicKeyToken=null
-// MVID: 8FAB7F03-1085-4650-8C57-7A04F40293E8
-// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet.dll
+// MVID: BCFC550F-93AE-4DF9-8F50-A984FB298337
+// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet-0bfa2388b222842ad29fcffb3677177a38854ebd\bin\Release\fsdfsd.dll
 
 using System;
 using System.Collections.Generic;
@@ -116,7 +116,7 @@ namespace xNet
       if (this.HasError)
         throw new InvalidOperationException(Resources.InvalidOperationException_HttpResponse_HasError);
       if (this.MessageBodyLoaded)
-        return Array.Empty<byte>();
+        return new byte[0];
       MemoryStream memoryStream = new MemoryStream(this.ContentLength == -1 ? 0 : this.ContentLength);
       try
       {
@@ -817,8 +817,8 @@ label_1:
       private byte[] _lineBuffer = new byte[1000];
       private const int InitialLineSize = 1000;
       private Stream _stream;
-      private readonly byte[] _buffer;
-      private readonly int _bufferSize;
+      private byte[] _buffer;
+      private int _bufferSize;
       private int _linePosition;
 
       public bool HasData
@@ -888,8 +888,8 @@ label_6:
 
     private sealed class ZipWraperStream : Stream
     {
-      private readonly Stream _baseStream;
-      private readonly HttpResponse.ReceiverHelper _receiverHelper;
+      private Stream _baseStream;
+      private HttpResponse.ReceiverHelper _receiverHelper;
 
       public int BytesRead { get; private set; }
 

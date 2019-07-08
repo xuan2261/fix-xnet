@@ -1,8 +1,8 @@
 ﻿// Decompiled with JetBrains decompiler
 // Type: xNet.Socks5ProxyClient
 // Assembly: xNet, Version=3.3.3.0, Culture=neutral, PublicKeyToken=null
-// MVID: 8FAB7F03-1085-4650-8C57-7A04F40293E8
-// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet.dll
+// MVID: BCFC550F-93AE-4DF9-8F50-A984FB298337
+// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet-0bfa2388b222842ad29fcffb3677177a38854ebd\bin\Release\fsdfsd.dll
 
 using System;
 using System.IO;
@@ -14,25 +14,32 @@ namespace xNet
 {
   public class Socks5ProxyClient : ProxyClient
   {
-    private const int DEFAULT_PORT = 1080;
-    private const byte VERSION_NUMBER = 5;
-    private const byte RESERVED = 0;
-    private const byte AUTH_METHOD_NO_AUTHENTICATION_REQUIRED = 0;
-    private const byte AUTH_METHOD_USERNAME_PASSWORD = 2;
-    private const byte AUTH_METHOD_REPLY_NO_ACCEPTABLE_METHODS = 255;
-    private const byte COMMAND_CONNECT = 1;
-    private const byte COMMAND_REPLY_SUCCEEDED = 0;
-    private const byte COMMAND_REPLY_GENERAL_SOCKS_SERVER_FAILURE = 1;
-    private const byte COMMAND_REPLY_CONNECTION_NOT_ALLOWED_BY_RULESET = 2;
-    private const byte COMMAND_REPLY_NETWORK_UNREACHABLE = 3;
-    private const byte COMMAND_REPLY_HOST_UNREACHABLE = 4;
-    private const byte COMMAND_REPLY_CONNECTION_REFUSED = 5;
-    private const byte COMMAND_REPLY_TTLEXPIRED = 6;
-    private const byte COMMAND_REPLY_COMMAND_NOT_SUPPORTED = 7;
-    private const byte COMMAND_REPLY_ADDRESS_TYPE_NOT_SUPPORTED = 8;
-    private const byte ADDRESS_TYPE_IPV4 = 1;
-    private const byte ADDRESS_TYPE_DOMAIN_NAME = 3;
-    private const byte ADDRESS_TYPE_IPV6 = 4;
+    private const int DefaultPort = 1080;
+    private const byte VersionNumber = 5;
+    private const byte Reserved = 0;
+    private const byte AuthMethodNoAuthenticationRequired = 0;
+    private const byte AuthMethodGssapi = 1;
+    private const byte AuthMethodUsernamePassword = 2;
+    private const byte AuthMethodIanaAssignedRangeBegin = 3;
+    private const byte AuthMethodIanaAssignedRangeEnd = 127;
+    private const byte AuthMethodReservedRangeBegin = 128;
+    private const byte AuthMethodReservedRangeEnd = 254;
+    private const byte AuthMethodReplyNoAcceptableMethods = 255;
+    private const byte CommandConnect = 1;
+    private const byte CommandBind = 2;
+    private const byte CommandUdpAssociate = 3;
+    private const byte CommandReplySucceeded = 0;
+    private const byte CommandReplyGeneralSocksServerFailure = 1;
+    private const byte CommandReplyConnectionNotAllowedByRuleset = 2;
+    private const byte CommandReplyNetworkUnreachable = 3;
+    private const byte CommandReplyHostUnreachable = 4;
+    private const byte CommandReplyConnectionRefused = 5;
+    private const byte CommandReplyTTLExpired = 6;
+    private const byte CommandReplyCommandNotSupported = 7;
+    private const byte CommandReplyAddressTypeNotSupported = 8;
+    private const byte AddressTypeIPV4 = 1;
+    private const byte AddressTypeDomainName = 3;
+    private const byte AddressTypeIPV6 = 4;
 
     public Socks5ProxyClient()
       : this((string) null)

@@ -1,8 +1,8 @@
 ﻿// Decompiled with JetBrains decompiler
 // Type: xNet.Http
 // Assembly: xNet, Version=3.3.3.0, Culture=neutral, PublicKeyToken=null
-// MVID: 8FAB7F03-1085-4650-8C57-7A04F40293E8
-// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet.dll
+// MVID: BCFC550F-93AE-4DF9-8F50-A984FB298337
+// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet-0bfa2388b222842ad29fcffb3677177a38854ebd\bin\Release\fsdfsd.dll
 
 using Microsoft.Win32;
 using System;
@@ -199,15 +199,15 @@ namespace xNet
     public static readonly RemoteCertificateValidationCallback AcceptAllCertificationsCallback = new RemoteCertificateValidationCallback(Http.AcceptAllCertifications);
     public const string NewLine = "\r\n";
     [ThreadStatic]
-    private static Random rand;
+    private static Random _rand;
 
     private static Random Rand
     {
       get
       {
-        if (Http.rand == null)
-          Http.rand = new Random();
-        return Http.rand;
+        if (Http._rand == null)
+          Http._rand = new Random();
+        return Http._rand;
       }
     }
 
@@ -215,8 +215,7 @@ namespace xNet
     {
       if (string.IsNullOrEmpty(str))
         return string.Empty;
-      if (encoding == null)
-        encoding = Encoding.UTF8;
+      encoding = encoding ?? Encoding.UTF8;
       byte[] bytes1 = encoding.GetBytes(str);
       int num1 = 0;
       int num2 = 0;

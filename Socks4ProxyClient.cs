@@ -1,8 +1,8 @@
 ﻿// Decompiled with JetBrains decompiler
 // Type: xNet.Socks4ProxyClient
 // Assembly: xNet, Version=3.3.3.0, Culture=neutral, PublicKeyToken=null
-// MVID: 8FAB7F03-1085-4650-8C57-7A04F40293E8
-// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet.dll
+// MVID: BCFC550F-93AE-4DF9-8F50-A984FB298337
+// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet-0bfa2388b222842ad29fcffb3677177a38854ebd\bin\Release\fsdfsd.dll
 
 using System;
 using System.IO;
@@ -94,8 +94,8 @@ namespace xNet
       int destinationPort)
     {
       byte[] ipAddressBytes = this.GetIPAddressBytes(destinationHost);
-      byte[] portBytes = Socks4ProxyClient.GetPortBytes(destinationPort);
-      byte[] numArray1 = string.IsNullOrEmpty(this._username) ? Array.Empty<byte>() : Encoding.ASCII.GetBytes(this._username);
+      byte[] portBytes = this.GetPortBytes(destinationPort);
+      byte[] numArray1 = string.IsNullOrEmpty(this._username) ? new byte[0] : Encoding.ASCII.GetBytes(this._username);
       byte[] buffer1 = new byte[9 + numArray1.Length];
       buffer1[0] = (byte) 4;
       buffer1[1] = command;
@@ -116,7 +116,7 @@ namespace xNet
 
     protected internal byte[] GetIPAddressBytes(string destinationHost)
     {
-      IPAddress address;
+      IPAddress address = (IPAddress) null;
       if (!IPAddress.TryParse(destinationHost, out address))
       {
         try
@@ -135,7 +135,7 @@ namespace xNet
       return address.GetAddressBytes();
     }
 
-    protected internal static byte[] GetPortBytes(int port)
+    protected internal byte[] GetPortBytes(int port)
     {
       return new byte[2]
       {

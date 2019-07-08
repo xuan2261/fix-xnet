@@ -1,8 +1,8 @@
 ﻿// Decompiled with JetBrains decompiler
 // Type: xNet.ChainProxyClient
 // Assembly: xNet, Version=3.3.3.0, Culture=neutral, PublicKeyToken=null
-// MVID: 8FAB7F03-1085-4650-8C57-7A04F40293E8
-// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet.dll
+// MVID: BCFC550F-93AE-4DF9-8F50-A984FB298337
+// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet-0bfa2388b222842ad29fcffb3677177a38854ebd\bin\Release\fsdfsd.dll
 
 using System;
 using System.Collections.Generic;
@@ -14,17 +14,17 @@ namespace xNet
 {
   public class ChainProxyClient : ProxyClient
   {
-    private readonly List<ProxyClient> proxies = new List<ProxyClient>();
+    private List<ProxyClient> _proxies = new List<ProxyClient>();
     [ThreadStatic]
-    private static Random rand;
+    private static Random _rand;
 
     private static Random Rand
     {
       get
       {
-        if (ChainProxyClient.rand == null)
-          ChainProxyClient.rand = new Random();
-        return ChainProxyClient.rand;
+        if (ChainProxyClient._rand == null)
+          ChainProxyClient._rand = new Random();
+        return ChainProxyClient._rand;
       }
     }
 
@@ -34,7 +34,7 @@ namespace xNet
     {
       get
       {
-        return this.proxies;
+        return this._proxies;
       }
     }
 
@@ -121,12 +121,12 @@ namespace xNet
       int destinationPort,
       TcpClient tcpClient = null)
     {
-      if (this.proxies.Count == 0)
+      if (this._proxies.Count == 0)
         throw new InvalidOperationException(Resources.InvalidOperationException_ChainProxyClient_NotProxies);
       List<ProxyClient> proxyClientList;
       if (this.EnableShuffle)
       {
-        proxyClientList = this.proxies.ToList<ProxyClient>();
+        proxyClientList = this._proxies.ToList<ProxyClient>();
         for (int index1 = 0; index1 < proxyClientList.Count; ++index1)
         {
           int index2 = ChainProxyClient.Rand.Next(proxyClientList.Count);
@@ -136,7 +136,7 @@ namespace xNet
         }
       }
       else
-        proxyClientList = this.proxies;
+        proxyClientList = this._proxies;
       int index3 = proxyClientList.Count - 1;
       TcpClient tcpClient1 = tcpClient;
       for (int index1 = 0; index1 < index3; ++index1)
@@ -147,7 +147,7 @@ namespace xNet
     public override string ToString()
     {
       StringBuilder stringBuilder = new StringBuilder();
-      foreach (ProxyClient proxy in this.proxies)
+      foreach (ProxyClient proxy in this._proxies)
         stringBuilder.AppendLine(proxy.ToString());
       return stringBuilder.ToString();
     }
@@ -155,7 +155,7 @@ namespace xNet
     public new virtual string ToExtendedString()
     {
       StringBuilder stringBuilder = new StringBuilder();
-      foreach (ProxyClient proxy in this.proxies)
+      foreach (ProxyClient proxy in this._proxies)
         stringBuilder.AppendLine(proxy.ToExtendedString());
       return stringBuilder.ToString();
     }
@@ -164,27 +164,27 @@ namespace xNet
     {
       if (proxy == null)
         throw new ArgumentNullException(nameof (proxy));
-      this.proxies.Add(proxy);
+      this._proxies.Add(proxy);
     }
 
     public void AddHttpProxy(string proxyAddress)
     {
-      this.proxies.Add((ProxyClient) HttpProxyClient.Parse(proxyAddress));
+      this._proxies.Add((ProxyClient) HttpProxyClient.Parse(proxyAddress));
     }
 
     public void AddSocks4Proxy(string proxyAddress)
     {
-      this.proxies.Add((ProxyClient) Socks4ProxyClient.Parse(proxyAddress));
+      this._proxies.Add((ProxyClient) Socks4ProxyClient.Parse(proxyAddress));
     }
 
     public void AddSocks4aProxy(string proxyAddress)
     {
-      this.proxies.Add((ProxyClient) Socks4aProxyClient.Parse(proxyAddress));
+      this._proxies.Add((ProxyClient) Socks4aProxyClient.Parse(proxyAddress));
     }
 
     public void AddSocks5Proxy(string proxyAddress)
     {
-      this.proxies.Add((ProxyClient) Socks5ProxyClient.Parse(proxyAddress));
+      this._proxies.Add((ProxyClient) Socks5ProxyClient.Parse(proxyAddress));
     }
   }
 }

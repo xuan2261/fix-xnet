@@ -1,8 +1,8 @@
 ﻿// Decompiled with JetBrains decompiler
 // Type: xNet.Socks4aProxyClient
 // Assembly: xNet, Version=3.3.3.0, Culture=neutral, PublicKeyToken=null
-// MVID: 8FAB7F03-1085-4650-8C57-7A04F40293E8
-// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet.dll
+// MVID: BCFC550F-93AE-4DF9-8F50-A984FB298337
+// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet-0bfa2388b222842ad29fcffb3677177a38854ebd\bin\Release\fsdfsd.dll
 
 using System;
 using System.Net.Sockets;
@@ -56,7 +56,7 @@ namespace xNet
       string destinationHost,
       int destinationPort)
     {
-      byte[] portBytes = Socks4ProxyClient.GetPortBytes(destinationPort);
+      byte[] portBytes = this.GetPortBytes(destinationPort);
       byte[] numArray1 = new byte[4]
       {
         (byte) 0,
@@ -64,7 +64,7 @@ namespace xNet
         (byte) 0,
         (byte) 1
       };
-      byte[] numArray2 = string.IsNullOrEmpty(this._username) ? Array.Empty<byte>() : Encoding.ASCII.GetBytes(this._username);
+      byte[] numArray2 = string.IsNullOrEmpty(this._username) ? new byte[0] : Encoding.ASCII.GetBytes(this._username);
       byte[] bytes = Encoding.ASCII.GetBytes(destinationHost);
       byte[] buffer1 = new byte[10 + numArray2.Length + bytes.Length];
       buffer1[0] = (byte) 4;

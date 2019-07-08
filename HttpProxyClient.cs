@@ -1,8 +1,8 @@
 ﻿// Decompiled with JetBrains decompiler
 // Type: xNet.HttpProxyClient
 // Assembly: xNet, Version=3.3.3.0, Culture=neutral, PublicKeyToken=null
-// MVID: 8FAB7F03-1085-4650-8C57-7A04F40293E8
-// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet.dll
+// MVID: BCFC550F-93AE-4DF9-8F50-A984FB298337
+// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet-0bfa2388b222842ad29fcffb3677177a38854ebd\bin\Release\fsdfsd.dll
 
 using System;
 using System.IO;
@@ -14,8 +14,8 @@ namespace xNet
 {
   public class HttpProxyClient : ProxyClient
   {
-    private const int BUFFER_SIZE = 50;
-    private const int DEFAULT_PORT = 8080;
+    private const int BufferSize = 50;
+    private const int DefaultPort = 8080;
 
     public HttpProxyClient()
       : this((string) null)

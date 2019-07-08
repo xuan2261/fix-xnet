@@ -1,8 +1,8 @@
 ﻿// Decompiled with JetBrains decompiler
 // Type: xNet.HttpRequest
 // Assembly: xNet, Version=3.3.3.0, Culture=neutral, PublicKeyToken=null
-// MVID: 8FAB7F03-1085-4650-8C57-7A04F40293E8
-// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet.dll
+// MVID: BCFC550F-93AE-4DF9-8F50-A984FB298337
+// Assembly location: C:\Users\Henris\Desktop\Smart Pastebin\xNet-0bfa2388b222842ad29fcffb3677177a38854ebd\bin\Release\fsdfsd.dll
 
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace xNet
   public class HttpRequest : IDisposable
   {
     public static readonly Version ProtocolVersion = new Version(1, 1);
-    private static readonly List<string> closedHeaders = new List<string>()
+    private static readonly List<string> _closedHeaders = new List<string>()
     {
       "Accept-Encoding",
       "Content-Length",
@@ -31,37 +31,37 @@ namespace xNet
       "Proxy-Connection",
       "Host"
     };
-    private int maximumAutomaticRedirections = 5;
-    private int connectTimeout = 60000;
-    private int readWriteTimeout = 60000;
-    private int keepAliveTimeout = 30000;
-    private int maximumKeepAliveRequests = 100;
-    private int reconnectLimit = 3;
-    private int reconnectDelay = 100;
-    private readonly Dictionary<string, string> permanentHeaders = new Dictionary<string, string>((IEqualityComparer<string>) StringComparer.OrdinalIgnoreCase);
-    private HttpResponse response;
-    private TcpClient connection;
-    private Stream connectionCommonStream;
-    private NetworkStream connectionNetworkStream;
-    private ProxyClient currentProxy;
-    private int redirectionCount;
-    private DateTime whenConnectionIdle;
-    private int keepAliveRequestCount;
-    private bool keepAliveReconnected;
-    private bool canReportBytesReceived;
-    private int reconnectCount;
+    private int _maximumAutomaticRedirections = 5;
+    private int _connectTimeout = 60000;
+    private int _readWriteTimeout = 60000;
+    private int _keepAliveTimeout = 30000;
+    private int _maximumKeepAliveRequests = 100;
+    private int _reconnectLimit = 3;
+    private int _reconnectDelay = 100;
+    private readonly Dictionary<string, string> _permanentHeaders = new Dictionary<string, string>((IEqualityComparer<string>) StringComparer.OrdinalIgnoreCase);
+    private HttpResponse _response;
+    private TcpClient _connection;
+    private Stream _connectionCommonStream;
+    private NetworkStream _connectionNetworkStream;
+    private ProxyClient _currentProxy;
+    private int _redirectionCount;
+    private DateTime _whenConnectionIdle;
+    private int _keepAliveRequestCount;
+    private bool _keepAliveReconnected;
+    private int _reconnectCount;
     private HttpMethod _method;
-    private HttpContent content;
-    private RequestParams temporaryParams;
-    private RequestParams temporaryUrlParams;
-    private Dictionary<string, string> temporaryHeaders;
-    private MultipartContent temporaryMultipartContent;
-    private long bytesSent;
-    private long totalBytesSent;
-    private long bytesReceived;
-    private long totalBytesReceived;
-    private EventHandler<UploadProgressChangedEventArgs> uploadProgressChangedHandler;
-    private EventHandler<DownloadProgressChangedEventArgs> downloadProgressChangedHandler;
+    private HttpContent _content;
+    private RequestParams _temporaryParams;
+    private RequestParams _temporaryUrlParams;
+    private Dictionary<string, string> _temporaryHeaders;
+    private MultipartContent _temporaryMultipartContent;
+    private long _bytesSent;
+    private long _totalBytesSent;
+    private long _bytesReceived;
+    private long _totalBytesReceived;
+    private bool _canReportBytesReceived;
+    private EventHandler<UploadProgressChangedEventArgs> _uploadProgressChangedHandler;
+    private EventHandler<DownloadProgressChangedEventArgs> _downloadProgressChangedHandler;
     public RemoteCertificateValidationCallback SslCertificateValidatorCallback;
 
     public static bool UseIeProxy { get; set; }
@@ -74,11 +74,11 @@ namespace xNet
     {
       add
       {
-        this.uploadProgressChangedHandler += value;
+        this._uploadProgressChangedHandler += value;
       }
       remove
       {
-        this.uploadProgressChangedHandler -= value;
+        this._uploadProgressChangedHandler -= value;
       }
     }
 
@@ -86,11 +86,11 @@ namespace xNet
     {
       add
       {
-        this.downloadProgressChangedHandler += value;
+        this._downloadProgressChangedHandler += value;
       }
       remove
       {
-        this.downloadProgressChangedHandler -= value;
+        this._downloadProgressChangedHandler -= value;
       }
     }
 
@@ -102,7 +102,7 @@ namespace xNet
     {
       get
       {
-        return this.response;
+        return this._response;
       }
     }
 
@@ -114,13 +114,13 @@ namespace xNet
     {
       get
       {
-        return this.maximumAutomaticRedirections;
+        return this._maximumAutomaticRedirections;
       }
       set
       {
         if (value < 1)
           throw ExceptionHelper.CanNotBeLess<int>(nameof (MaximumAutomaticRedirections), 1);
-        this.maximumAutomaticRedirections = value;
+        this._maximumAutomaticRedirections = value;
       }
     }
 
@@ -128,13 +128,13 @@ namespace xNet
     {
       get
       {
-        return this.connectTimeout;
+        return this._connectTimeout;
       }
       set
       {
         if (value < 0)
           throw ExceptionHelper.CanNotBeLess<int>(nameof (ConnectTimeout), 0);
-        this.connectTimeout = value;
+        this._connectTimeout = value;
       }
     }
 
@@ -142,13 +142,13 @@ namespace xNet
     {
       get
       {
-        return this.readWriteTimeout;
+        return this._readWriteTimeout;
       }
       set
       {
         if (value < 0)
           throw ExceptionHelper.CanNotBeLess<int>(nameof (ReadWriteTimeout), 0);
-        this.readWriteTimeout = value;
+        this._readWriteTimeout = value;
       }
     }
 
@@ -160,13 +160,13 @@ namespace xNet
     {
       get
       {
-        return this.keepAliveTimeout;
+        return this._keepAliveTimeout;
       }
       set
       {
         if (value < 0)
           throw ExceptionHelper.CanNotBeLess<int>(nameof (KeepAliveTimeout), 0);
-        this.keepAliveTimeout = value;
+        this._keepAliveTimeout = value;
       }
     }
 
@@ -174,13 +174,13 @@ namespace xNet
     {
       get
       {
-        return this.maximumKeepAliveRequests;
+        return this._maximumKeepAliveRequests;
       }
       set
       {
         if (value < 1)
           throw ExceptionHelper.CanNotBeLess<int>(nameof (MaximumKeepAliveRequests), 1);
-        this.maximumKeepAliveRequests = value;
+        this._maximumKeepAliveRequests = value;
       }
     }
 
@@ -190,13 +190,13 @@ namespace xNet
     {
       get
       {
-        return this.reconnectLimit;
+        return this._reconnectLimit;
       }
       set
       {
         if (value < 1)
           throw ExceptionHelper.CanNotBeLess<int>(nameof (ReconnectLimit), 1);
-        this.reconnectLimit = value;
+        this._reconnectLimit = value;
       }
     }
 
@@ -204,13 +204,13 @@ namespace xNet
     {
       get
       {
-        return this.reconnectDelay;
+        return this._reconnectDelay;
       }
       set
       {
         if (value < 0)
           throw ExceptionHelper.CanNotBeLess<int>(nameof (ReconnectDelay), 0);
-        this.reconnectDelay = value;
+        this._reconnectDelay = value;
       }
     }
 
@@ -266,7 +266,7 @@ namespace xNet
     {
       get
       {
-        return this.connection;
+        return this._connection;
       }
     }
 
@@ -274,7 +274,7 @@ namespace xNet
     {
       get
       {
-        return this.connectionCommonStream;
+        return this._connectionCommonStream;
       }
     }
 
@@ -282,7 +282,7 @@ namespace xNet
     {
       get
       {
-        return this.connectionNetworkStream;
+        return this._connectionNetworkStream;
       }
     }
 
@@ -290,9 +290,9 @@ namespace xNet
     {
       get
       {
-        if (this.temporaryMultipartContent == null)
-          this.temporaryMultipartContent = new MultipartContent();
-        return this.temporaryMultipartContent;
+        if (this._temporaryMultipartContent == null)
+          this._temporaryMultipartContent = new MultipartContent();
+        return this._temporaryMultipartContent;
       }
     }
 
@@ -305,7 +305,7 @@ namespace xNet
         if (headerName.Length == 0)
           throw ExceptionHelper.EmptyString(nameof (headerName));
         string empty;
-        if (!this.permanentHeaders.TryGetValue(headerName, out empty))
+        if (!this._permanentHeaders.TryGetValue(headerName, out empty))
           empty = string.Empty;
         return empty;
       }
@@ -318,9 +318,9 @@ namespace xNet
         if (this.IsClosedHeader(headerName))
           throw new ArgumentException(string.Format(Resources.ArgumentException_HttpRequest_SetNotAvailableHeader, (object) headerName), nameof (headerName));
         if (string.IsNullOrEmpty(value))
-          this.permanentHeaders.Remove(headerName);
+          this._permanentHeaders.Remove(headerName);
         else
-          this.permanentHeaders[headerName] = value;
+          this._permanentHeaders[headerName] = value;
       }
     }
 
@@ -369,14 +369,14 @@ namespace xNet
     public HttpResponse Get(string address, RequestParams urlParams = null)
     {
       if (urlParams != null)
-        this.temporaryUrlParams = urlParams;
+        this._temporaryUrlParams = urlParams;
       return this.Raw(HttpMethod.GET, address, (HttpContent) null);
     }
 
     public HttpResponse Get(Uri address, RequestParams urlParams = null)
     {
       if (urlParams != null)
-        this.temporaryUrlParams = urlParams;
+        this._temporaryUrlParams = urlParams;
       return this.Raw(HttpMethod.GET, address, (HttpContent) null);
     }
 
@@ -540,17 +540,17 @@ namespace xNet
         throw new ArgumentNullException(nameof (address));
       if (!address.IsAbsoluteUri)
         address = this.GetRequestAddress(this.BaseAddress, address);
-      if (this.temporaryUrlParams != null)
+      if (this._temporaryUrlParams != null)
         address = new UriBuilder(address)
         {
-          Query = Http.ToQueryString((IEnumerable<KeyValuePair<string, string>>) this.temporaryUrlParams, true)
+          Query = Http.ToQueryString((IEnumerable<KeyValuePair<string, string>>) this._temporaryUrlParams, true)
         }.Uri;
       if (content == null)
       {
-        if (this.temporaryParams != null)
-          content = (HttpContent) new FormUrlEncodedContent((IEnumerable<KeyValuePair<string, string>>) this.temporaryParams, false, this.CharacterSet);
-        else if (this.temporaryMultipartContent != null)
-          content = (HttpContent) this.temporaryMultipartContent;
+        if (this._temporaryParams != null)
+          content = (HttpContent) new FormUrlEncodedContent((IEnumerable<KeyValuePair<string, string>>) this._temporaryParams, false, this.CharacterSet);
+        else if (this._temporaryMultipartContent != null)
+          content = (HttpContent) this._temporaryMultipartContent;
       }
       try
       {
@@ -569,9 +569,9 @@ namespace xNet
         throw new ArgumentNullException(nameof (name));
       if (name.Length == 0)
         throw ExceptionHelper.EmptyString(nameof (name));
-      if (this.temporaryUrlParams == null)
-        this.temporaryUrlParams = new RequestParams();
-      this.temporaryUrlParams[name] = value;
+      if (this._temporaryUrlParams == null)
+        this._temporaryUrlParams = new RequestParams();
+      this._temporaryUrlParams[name] = value;
       return this;
     }
 
@@ -581,9 +581,9 @@ namespace xNet
         throw new ArgumentNullException(nameof (name));
       if (name.Length == 0)
         throw ExceptionHelper.EmptyString(nameof (name));
-      if (this.temporaryParams == null)
-        this.temporaryParams = new RequestParams();
-      this.temporaryParams[name] = value;
+      if (this._temporaryParams == null)
+        this._temporaryParams = new RequestParams();
+      this._temporaryParams[name] = value;
       return this;
     }
 
@@ -706,9 +706,9 @@ namespace xNet
         throw ExceptionHelper.EmptyString(nameof (value));
       if (this.IsClosedHeader(name))
         throw new ArgumentException(string.Format(Resources.ArgumentException_HttpRequest_SetNotAvailableHeader, (object) name), nameof (name));
-      if (this.temporaryHeaders == null)
-        this.temporaryHeaders = new Dictionary<string, string>();
-      this.temporaryHeaders[name] = value;
+      if (this._temporaryHeaders == null)
+        this._temporaryHeaders = new Dictionary<string, string>();
+      this._temporaryHeaders[name] = value;
       return this;
     }
 
@@ -741,7 +741,7 @@ namespace xNet
         throw new ArgumentNullException(nameof (headerName));
       if (headerName.Length == 0)
         throw ExceptionHelper.EmptyString(nameof (headerName));
-      return this.permanentHeaders.ContainsKey(headerName);
+      return this._permanentHeaders.ContainsKey(headerName);
     }
 
     public bool ContainsHeader(HttpHeader header)
@@ -751,28 +751,28 @@ namespace xNet
 
     public Dictionary<string, string>.Enumerator EnumerateHeaders()
     {
-      return this.permanentHeaders.GetEnumerator();
+      return this._permanentHeaders.GetEnumerator();
     }
 
     public void ClearAllHeaders()
     {
-      this.permanentHeaders.Clear();
+      this._permanentHeaders.Clear();
     }
 
     protected virtual void Dispose(bool disposing)
     {
-      if (!disposing || this.connection == null)
+      if (!disposing || this._connection == null)
         return;
-      this.connection.Close();
-      this.connection = (TcpClient) null;
-      this.connectionCommonStream = (Stream) null;
-      this.connectionNetworkStream = (NetworkStream) null;
-      this.keepAliveRequestCount = 0;
+      this._connection.Close();
+      this._connection = (TcpClient) null;
+      this._connectionCommonStream = (Stream) null;
+      this._connectionNetworkStream = (NetworkStream) null;
+      this._keepAliveRequestCount = 0;
     }
 
     protected virtual void OnUploadProgressChanged(UploadProgressChangedEventArgs e)
     {
-      EventHandler<UploadProgressChangedEventArgs> progressChangedHandler = this.uploadProgressChangedHandler;
+      EventHandler<UploadProgressChangedEventArgs> progressChangedHandler = this._uploadProgressChangedHandler;
       if (progressChangedHandler == null)
         return;
       progressChangedHandler((object) this, e);
@@ -780,7 +780,7 @@ namespace xNet
 
     protected virtual void OnDownloadProgressChanged(DownloadProgressChangedEventArgs e)
     {
-      EventHandler<DownloadProgressChangedEventArgs> progressChangedHandler = this.downloadProgressChangedHandler;
+      EventHandler<DownloadProgressChangedEventArgs> progressChangedHandler = this._downloadProgressChangedHandler;
       if (progressChangedHandler == null)
         return;
       progressChangedHandler((object) this, e);
@@ -791,12 +791,12 @@ namespace xNet
       this.KeepAlive = true;
       this.AllowAutoRedirect = true;
       this.EnableEncodingContent = true;
-      this.response = new HttpResponse(this);
+      this._response = new HttpResponse(this);
     }
 
     private Uri GetRequestAddress(Uri baseAddress, Uri address)
     {
-      Uri result;
+      Uri result = address;
       if (baseAddress == (Uri) null)
         result = new UriBuilder(address.OriginalString).Uri;
       else
@@ -807,7 +807,7 @@ namespace xNet
     private HttpResponse Request(HttpMethod method, Uri address, HttpContent content)
     {
       this._method = method;
-      this.content = content;
+      this._content = content;
       this.CloseConnectionIfNeeded();
       Uri address1 = this.Address;
       this.Address = address;
@@ -823,9 +823,9 @@ namespace xNet
         throw;
       }
       if (connectionOrUseExisting)
-        this.keepAliveRequestCount = 1;
+        this._keepAliveRequestCount = 1;
       else
-        ++this.keepAliveRequestCount;
+        ++this._keepAliveRequestCount;
       try
       {
         this.SendRequestData(method);
@@ -848,36 +848,36 @@ namespace xNet
       {
         if (this.CanReconnect())
           return this.ReconnectAfterFail();
-        if (this.KeepAlive && !this.keepAliveReconnected && (!connectionOrUseExisting && ex.EmptyMessageBody))
+        if (this.KeepAlive && !this._keepAliveReconnected && (!connectionOrUseExisting && ex.EmptyMessageBody))
           return this.KeepAliveReconect();
         throw;
       }
-      this.response.ReconnectCount = this.reconnectCount;
-      this.reconnectCount = 0;
-      this.keepAliveReconnected = false;
-      this.whenConnectionIdle = DateTime.Now;
+      this._response.ReconnectCount = this._reconnectCount;
+      this._reconnectCount = 0;
+      this._keepAliveReconnected = false;
+      this._whenConnectionIdle = DateTime.Now;
       if (!this.IgnoreProtocolErrors)
-        this.CheckStatusCode(this.response.StatusCode);
-      if (this.AllowAutoRedirect && this.response.HasRedirect)
+        this.CheckStatusCode(this._response.StatusCode);
+      if (this.AllowAutoRedirect && this._response.HasRedirect)
       {
-        if (++this.redirectionCount > this.maximumAutomaticRedirections)
+        if (++this._redirectionCount > this._maximumAutomaticRedirections)
           throw this.NewHttpException(Resources.HttpException_LimitRedirections, (Exception) null, HttpExceptionStatus.Other);
         this.ClearRequestData();
-        return this.Request(HttpMethod.GET, this.response.RedirectAddress, (HttpContent) null);
+        return this.Request(HttpMethod.GET, this._response.RedirectAddress, (HttpContent) null);
       }
-      this.redirectionCount = 0;
-      return this.response;
+      this._redirectionCount = 0;
+      return this._response;
     }
 
     private void CloseConnectionIfNeeded()
     {
-      if (this.connection == null || this.response.HasError)
+      if (this._connection == null || this._response.HasError)
         return;
-      if (this.response.MessageBodyLoaded)
+      if (this._response.MessageBodyLoaded)
         return;
       try
       {
-        this.response.None();
+        this._response.None();
       }
       catch (HttpException ex)
       {
@@ -888,9 +888,9 @@ namespace xNet
     private bool TryCreateConnectionOrUseExisting(Uri address, Uri previousAddress)
     {
       ProxyClient proxy = this.GetProxy();
-      if (!((this.connection != null ? 1 : 0) == 0 | this.currentProxy != proxy | (previousAddress == (Uri) null || previousAddress.Port != address.Port || previousAddress.Host != address.Host || previousAddress.Scheme != address.Scheme)) && !this.response.HasError && !this.KeepAliveLimitIsReached())
+      if (!((this._connection != null ? 1 : 0) == 0 | this._currentProxy != proxy | (previousAddress == (Uri) null || previousAddress.Port != address.Port || previousAddress.Host != address.Host || previousAddress.Scheme != address.Scheme)) && !this._response.HasError && !this.KeepAliveLimitIsReached())
         return false;
-      this.currentProxy = proxy;
+      this._currentProxy = proxy;
       this.Dispose();
       this.CreateConnection(address);
       return true;
@@ -900,72 +900,72 @@ namespace xNet
     {
       if (!this.KeepAlive)
         return false;
-      int? nullable = this.response.MaximumKeepAliveRequests;
-      if (this.keepAliveRequestCount >= (nullable ?? this.maximumKeepAliveRequests))
+      int? nullable = this._response.MaximumKeepAliveRequests;
+      if (this._keepAliveRequestCount >= (nullable ?? this._maximumKeepAliveRequests))
         return true;
-      nullable = this.response.KeepAliveTimeout;
-      return this.whenConnectionIdle.AddMilliseconds((double) (nullable ?? this.keepAliveTimeout)) < DateTime.Now;
+      nullable = this._response.KeepAliveTimeout;
+      return this._whenConnectionIdle.AddMilliseconds((double) (nullable ?? this._keepAliveTimeout)) < DateTime.Now;
     }
 
     private void SendRequestData(HttpMethod method)
     {
       long contentLength = 0;
       string contentType = string.Empty;
-      if (this.CanContainsRequestBody(method) && this.content != null)
+      if (this.CanContainsRequestBody(method) && this._content != null)
       {
-        contentType = this.content.ContentType;
-        contentLength = this.content.CalculateContentLength();
+        contentType = this._content.ContentType;
+        contentLength = this._content.CalculateContentLength();
       }
       string startingLine = this.GenerateStartingLine(method);
       string headers = this.GenerateHeaders(method, contentLength, contentType);
       byte[] bytes1 = Encoding.ASCII.GetBytes(startingLine);
       byte[] bytes2 = Encoding.ASCII.GetBytes(headers);
-      this.bytesSent = 0L;
-      this.totalBytesSent = (long) (bytes1.Length + bytes2.Length) + contentLength;
-      this.connectionCommonStream.Write(bytes1, 0, bytes1.Length);
-      this.connectionCommonStream.Write(bytes2, 0, bytes2.Length);
-      if ((this.content == null ? 0 : (contentLength > 0L ? 1 : 0)) == 0)
+      this._bytesSent = 0L;
+      this._totalBytesSent = (long) (bytes1.Length + bytes2.Length) + contentLength;
+      this._connectionCommonStream.Write(bytes1, 0, bytes1.Length);
+      this._connectionCommonStream.Write(bytes2, 0, bytes2.Length);
+      if ((this._content == null ? 0 : (contentLength > 0L ? 1 : 0)) == 0)
         return;
-      this.content.WriteTo(this.connectionCommonStream);
+      this._content.WriteTo(this._connectionCommonStream);
     }
 
     private void ReceiveResponseHeaders(HttpMethod method)
     {
-      this.canReportBytesReceived = false;
-      this.bytesReceived = 0L;
-      this.totalBytesReceived = this.response.LoadResponse(method);
-      this.canReportBytesReceived = true;
+      this._canReportBytesReceived = false;
+      this._bytesReceived = 0L;
+      this._totalBytesReceived = this._response.LoadResponse(method);
+      this._canReportBytesReceived = true;
     }
 
     private bool CanReconnect()
     {
       if (this.Reconnect)
-        return this.reconnectCount < this.reconnectLimit;
+        return this._reconnectCount < this._reconnectLimit;
       return false;
     }
 
     private HttpResponse ReconnectAfterFail()
     {
       this.Dispose();
-      Thread.Sleep(this.reconnectDelay);
-      ++this.reconnectCount;
-      return this.Request(this._method, this.Address, this.content);
+      Thread.Sleep(this._reconnectDelay);
+      ++this._reconnectCount;
+      return this.Request(this._method, this.Address, this._content);
     }
 
     private HttpResponse KeepAliveReconect()
     {
       this.Dispose();
-      this.keepAliveReconnected = true;
-      return this.Request(this._method, this.Address, this.content);
+      this._keepAliveReconnected = true;
+      return this.Request(this._method, this.Address, this._content);
     }
 
     private void CheckStatusCode(HttpStatusCode statusCode)
     {
       int num = (int) statusCode;
       if (num >= 400 && num < 500)
-        throw new HttpException(string.Format(Resources.HttpException_ClientError, (object) num), HttpExceptionStatus.ProtocolError, this.response.StatusCode, (Exception) null);
+        throw new HttpException(string.Format(Resources.HttpException_ClientError, (object) num), HttpExceptionStatus.ProtocolError, this._response.StatusCode, (Exception) null);
       if (num >= 500)
-        throw new HttpException(string.Format(Resources.HttpException_SeverError, (object) num), HttpExceptionStatus.ProtocolError, this.response.StatusCode, (Exception) null);
+        throw new HttpException(string.Format(Resources.HttpException_SeverError, (object) num), HttpExceptionStatus.ProtocolError, this._response.StatusCode, (Exception) null);
     }
 
     private bool CanContainsRequestBody(HttpMethod method)
@@ -1004,7 +1004,7 @@ namespace xNet
     private TcpClient CreateTcpConnection(string host, int port)
     {
       TcpClient tcpClient;
-      if (this.currentProxy == null)
+      if (this._currentProxy == null)
       {
         tcpClient = new TcpClient();
         Exception connectException = (Exception) null;
@@ -1031,7 +1031,7 @@ namespace xNet
             throw this.NewHttpException(Resources.HttpException_FailedConnect, ex, HttpExceptionStatus.ConnectFailure);
           throw;
         }
-        if (!connectDoneEvent.Wait(this.connectTimeout))
+        if (!connectDoneEvent.Wait(this._connectTimeout))
         {
           tcpClient.Close();
           throw this.NewHttpException(Resources.HttpException_ConnectTimeout, (Exception) null, HttpExceptionStatus.ConnectFailure);
@@ -1048,14 +1048,14 @@ namespace xNet
           tcpClient.Close();
           throw this.NewHttpException(Resources.HttpException_FailedConnect, (Exception) null, HttpExceptionStatus.ConnectFailure);
         }
-        tcpClient.SendTimeout = this.readWriteTimeout;
-        tcpClient.ReceiveTimeout = this.readWriteTimeout;
+        tcpClient.SendTimeout = this._readWriteTimeout;
+        tcpClient.ReceiveTimeout = this._readWriteTimeout;
       }
       else
       {
         try
         {
-          tcpClient = this.currentProxy.CreateConnection(host, port, (TcpClient) null);
+          tcpClient = this._currentProxy.CreateConnection(host, port, (TcpClient) null);
         }
         catch (ProxyException ex)
         {
@@ -1067,15 +1067,15 @@ namespace xNet
 
     private void CreateConnection(Uri address)
     {
-      this.connection = this.CreateTcpConnection(address.Host, address.Port);
-      this.connectionNetworkStream = this.connection.GetStream();
+      this._connection = this.CreateTcpConnection(address.Host, address.Port);
+      this._connectionNetworkStream = this._connection.GetStream();
       if (address.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase))
       {
         try
         {
-          SslStream sslStream = this.SslCertificateValidatorCallback != null ? new SslStream((Stream) this.connectionNetworkStream, false, this.SslCertificateValidatorCallback) : new SslStream((Stream) this.connectionNetworkStream, false, Http.AcceptAllCertificationsCallback);
+          SslStream sslStream = this.SslCertificateValidatorCallback != null ? new SslStream((Stream) this._connectionNetworkStream, false, this.SslCertificateValidatorCallback) : new SslStream((Stream) this._connectionNetworkStream, false, Http.AcceptAllCertificationsCallback);
           sslStream.AuthenticateAsClient(address.Host);
-          this.connectionCommonStream = (Stream) sslStream;
+          this._connectionCommonStream = (Stream) sslStream;
         }
         catch (Exception ex)
         {
@@ -1085,29 +1085,29 @@ namespace xNet
         }
       }
       else
-        this.connectionCommonStream = (Stream) this.connectionNetworkStream;
-      if (this.uploadProgressChangedHandler == null && this.downloadProgressChangedHandler == null)
+        this._connectionCommonStream = (Stream) this._connectionNetworkStream;
+      if (this._uploadProgressChangedHandler == null && this._downloadProgressChangedHandler == null)
         return;
-      HttpRequest.HttpWraperStream httpWraperStream = new HttpRequest.HttpWraperStream(this.connectionCommonStream, this.connection.SendBufferSize);
-      if (this.uploadProgressChangedHandler != null)
+      HttpRequest.HttpWraperStream httpWraperStream = new HttpRequest.HttpWraperStream(this._connectionCommonStream, this._connection.SendBufferSize);
+      if (this._uploadProgressChangedHandler != null)
         httpWraperStream.BytesWriteCallback = new Action<int>(this.ReportBytesSent);
-      if (this.downloadProgressChangedHandler != null)
+      if (this._downloadProgressChangedHandler != null)
         httpWraperStream.BytesReadCallback = new Action<int>(this.ReportBytesReceived);
-      this.connectionCommonStream = (Stream) httpWraperStream;
+      this._connectionCommonStream = (Stream) httpWraperStream;
     }
 
     private string GenerateStartingLine(HttpMethod method)
     {
-      string str = this.currentProxy == null || this.currentProxy.Type != ProxyType.Http && this.currentProxy.Type != ProxyType.Chain ? this.Address.PathAndQuery : this.Address.AbsoluteUri;
+      string str = this._currentProxy == null || this._currentProxy.Type != ProxyType.Http && this._currentProxy.Type != ProxyType.Chain ? this.Address.PathAndQuery : this.Address.AbsoluteUri;
       return string.Format("{0} {1} HTTP/{2}\r\n", (object) method, (object) str, (object) HttpRequest.ProtocolVersion);
     }
 
     private string GenerateHeaders(HttpMethod method, long contentLength = 0, string contentType = null)
     {
       Dictionary<string, string> commonHeaders = this.GenerateCommonHeaders(method, contentLength, contentType);
-      this.MergeHeaders(commonHeaders, this.permanentHeaders);
-      if (this.temporaryHeaders != null && this.temporaryHeaders.Count > 0)
-        this.MergeHeaders(commonHeaders, this.temporaryHeaders);
+      this.MergeHeaders(commonHeaders, this._permanentHeaders);
+      if (this._temporaryHeaders != null && this._temporaryHeaders.Count > 0)
+        this.MergeHeaders(commonHeaders, this._temporaryHeaders);
       if (this.Cookies != null && this.Cookies.Count != 0 && !commonHeaders.ContainsKey("Cookie"))
         commonHeaders["Cookie"] = this.Cookies.ToString();
       return this.ToHeadersString(commonHeaders);
@@ -1121,10 +1121,10 @@ namespace xNet
       Dictionary<string, string> dictionary = new Dictionary<string, string>((IEqualityComparer<string>) StringComparer.OrdinalIgnoreCase);
       dictionary["Host"] = !this.Address.IsDefaultPort ? string.Format("{0}:{1}", (object) this.Address.Host, (object) this.Address.Port) : this.Address.Host;
       HttpProxyClient httpProxy = (HttpProxyClient) null;
-      if (this.currentProxy != null && this.currentProxy.Type == ProxyType.Http)
-        httpProxy = this.currentProxy as HttpProxyClient;
-      else if (this.currentProxy != null && this.currentProxy.Type == ProxyType.Chain)
-        httpProxy = this.FindHttpProxyInChain(this.currentProxy as ChainProxyClient);
+      if (this._currentProxy != null && this._currentProxy.Type == ProxyType.Http)
+        httpProxy = this._currentProxy as HttpProxyClient;
+      else if (this._currentProxy != null && this._currentProxy.Type == ProxyType.Chain)
+        httpProxy = this.FindHttpProxyInChain(this._currentProxy as ChainProxyClient);
       if (httpProxy != null)
       {
         dictionary["Proxy-Connection"] = !this.KeepAlive ? "close" : "keep-alive";
@@ -1215,30 +1215,30 @@ namespace xNet
 
     private void ReportBytesSent(int bytesSent)
     {
-      this.bytesSent += (long) bytesSent;
-      this.OnUploadProgressChanged(new UploadProgressChangedEventArgs(this.bytesSent, this.totalBytesSent));
+      this._bytesSent += (long) bytesSent;
+      this.OnUploadProgressChanged(new UploadProgressChangedEventArgs(this._bytesSent, this._totalBytesSent));
     }
 
     private void ReportBytesReceived(int bytesReceived)
     {
-      this.bytesReceived += (long) bytesReceived;
-      if (!this.canReportBytesReceived)
+      this._bytesReceived += (long) bytesReceived;
+      if (!this._canReportBytesReceived)
         return;
-      this.OnDownloadProgressChanged(new DownloadProgressChangedEventArgs(this.bytesReceived, this.totalBytesReceived));
+      this.OnDownloadProgressChanged(new DownloadProgressChangedEventArgs(this._bytesReceived, this._totalBytesReceived));
     }
 
     private bool IsClosedHeader(string name)
     {
-      return HttpRequest.closedHeaders.Contains<string>(name, (IEqualityComparer<string>) StringComparer.OrdinalIgnoreCase);
+      return HttpRequest._closedHeaders.Contains<string>(name, (IEqualityComparer<string>) StringComparer.OrdinalIgnoreCase);
     }
 
     private void ClearRequestData()
     {
-      this.content = (HttpContent) null;
-      this.temporaryUrlParams = (RequestParams) null;
-      this.temporaryParams = (RequestParams) null;
-      this.temporaryMultipartContent = (MultipartContent) null;
-      this.temporaryHeaders = (Dictionary<string, string>) null;
+      this._content = (HttpContent) null;
+      this._temporaryUrlParams = (RequestParams) null;
+      this._temporaryParams = (RequestParams) null;
+      this._temporaryMultipartContent = (MultipartContent) null;
+      this._temporaryHeaders = (Dictionary<string, string>) null;
     }
 
     private HttpException NewHttpException(
@@ -1251,8 +1251,8 @@ namespace xNet
 
     private sealed class HttpWraperStream : Stream
     {
-      private readonly Stream baseStream;
-      private readonly int sendBufferSize;
+      private Stream _baseStream;
+      private int _sendBufferSize;
 
       public Action<int> BytesReadCallback { get; set; }
 
@@ -1262,7 +1262,7 @@ namespace xNet
       {
         get
         {
-          return this.baseStream.CanRead;
+          return this._baseStream.CanRead;
         }
       }
 
@@ -1270,7 +1270,7 @@ namespace xNet
       {
         get
         {
-          return this.baseStream.CanSeek;
+          return this._baseStream.CanSeek;
         }
       }
 
@@ -1278,7 +1278,7 @@ namespace xNet
       {
         get
         {
-          return this.baseStream.CanTimeout;
+          return this._baseStream.CanTimeout;
         }
       }
 
@@ -1286,7 +1286,7 @@ namespace xNet
       {
         get
         {
-          return this.baseStream.CanWrite;
+          return this._baseStream.CanWrite;
         }
       }
 
@@ -1294,7 +1294,7 @@ namespace xNet
       {
         get
         {
-          return this.baseStream.Length;
+          return this._baseStream.Length;
         }
       }
 
@@ -1302,18 +1302,18 @@ namespace xNet
       {
         get
         {
-          return this.baseStream.Position;
+          return this._baseStream.Position;
         }
         set
         {
-          this.baseStream.Position = value;
+          this._baseStream.Position = value;
         }
       }
 
       public HttpWraperStream(Stream baseStream, int sendBufferSize)
       {
-        this.baseStream = baseStream;
-        this.sendBufferSize = sendBufferSize;
+        this._baseStream = baseStream;
+        this._sendBufferSize = sendBufferSize;
       }
 
       public override void Flush()
@@ -1322,20 +1322,19 @@ namespace xNet
 
       public override void SetLength(long value)
       {
-        this.baseStream.SetLength(value);
+        this._baseStream.SetLength(value);
       }
 
       public override long Seek(long offset, SeekOrigin origin)
       {
-        return this.baseStream.Seek(offset, origin);
+        return this._baseStream.Seek(offset, origin);
       }
 
       public override int Read(byte[] buffer, int offset, int count)
       {
-        int num = this.baseStream.Read(buffer, offset, count);
-        Action<int> bytesReadCallback = this.BytesReadCallback;
-        if (bytesReadCallback != null)
-          bytesReadCallback(num);
+        int num = this._baseStream.Read(buffer, offset, count);
+        if (this.BytesReadCallback != null)
+          this.BytesReadCallback(num);
         return num;
       }
 
@@ -1343,7 +1342,7 @@ namespace xNet
       {
         if (this.BytesWriteCallback == null)
         {
-          this.baseStream.Write(buffer, offset, count);
+          this._baseStream.Write(buffer, offset, count);
         }
         else
         {
@@ -1351,17 +1350,17 @@ namespace xNet
           while (count > 0)
           {
             int count1;
-            if (count >= this.sendBufferSize)
+            if (count >= this._sendBufferSize)
             {
-              count1 = this.sendBufferSize;
-              this.baseStream.Write(buffer, offset1, count1);
-              offset1 += this.sendBufferSize;
-              count -= this.sendBufferSize;
+              count1 = this._sendBufferSize;
+              this._baseStream.Write(buffer, offset1, count1);
+              offset1 += this._sendBufferSize;
+              count -= this._sendBufferSize;
             }
             else
             {
               count1 = count;
-              this.baseStream.Write(buffer, offset1, count1);
+              this._baseStream.Write(buffer, offset1, count1);
               count = 0;
             }
             this.BytesWriteCallback(count1);

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--Project was exported from assembly: C:\Users\Henris\Desktop\Smart Pastebin\xNet.dll-->
+  <!--Project was exported from assembly: C:\Users\Henris\Desktop\Smart Pastebin\xNet-0bfa2388b222842ad29fcffb3677177a38854ebd\bin\Release\fsdfsd.dll-->
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8C0E2AE4-CD25-4670-8C28-85B9D8D39507}</ProjectGuid>
+    <ProjectGuid>{494326B9-53BE-4E68-A6FB-D8D550E9E1FC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>xNet</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
