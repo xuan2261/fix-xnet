@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\Henris\Desktop\Smart Pastebin\xNet.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8C0E2AE4-CD25-4670-8C28-85B9D8D39507}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>xNet</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <ApplicationVersion>3.3.3.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>xNet</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources.cs" />
+    <Compile Include="RequestParams.cs" />
+    <Compile Include="HttpExceptionStatus.cs" />
+    <Compile Include="BytesContent.cs" />
+    <Compile Include="FileContent.cs" />
+    <Compile Include="FormUrlEncodedContent.cs" />
+    <Compile Include="HttpContent.cs" />
+    <Compile Include="HttpStatusCode.cs" />
+    <Compile Include="MultipartContent.cs" />
+    <Compile Include="StreamContent.cs" />
+    <Compile Include="StringContent.cs" />
+    <Compile Include="ChainProxyClient.cs" />
+    <Compile Include="DownloadProgressChangedEventArgs.cs" />
+    <Compile Include="HttpHeader.cs" />
+    <Compile Include="UploadProgressChangedEventArgs.cs" />
+    <Compile Include="ExceptionHelper.cs" />
+    <Compile Include="Html.cs" />
+    <Compile Include="NetException.cs" />
+    <Compile Include="WinInet.cs" />
+    <Compile Include="HttpMethod.cs" />
+    <Compile Include="CookieDictionary.cs" />
+    <Compile Include="HttpProxyClient.cs" />
+    <Compile Include="HttpException.cs" />
+    <Compile Include="HttpRequest.cs" />
+    <Compile Include="HttpResponse.cs" />
+    <Compile Include="Http.cs" />
+    <Compile Include="ProxyClient.cs" />
+    <Compile Include="ProxyType.cs" />
+    <Compile Include="ProxyException.cs" />
+    <Compile Include="ProxyHelper.cs" />
+    <Compile Include="SafeNativeMethods.cs" />
+    <Compile Include="Socks4aProxyClient.cs" />
+    <Compile Include="Socks4ProxyClient.cs" />
+    <Compile Include="Socks5ProxyClient.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
